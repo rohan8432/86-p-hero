@@ -6,7 +6,7 @@ const handleCoding = async () => {
     data.data.forEach((category) => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <a onclick="loadCodingPost(${category.category_id})" class="tab">${category.category}</a>
+        <a onclick="loadCodingPost(${category.category_id})" class="tab hover:bg-red-400 bg-gray-200 text-black font-semibold rounded-sm w-16">${category.category}</a>
        
         `
         tabContainer.appendChild(div);
