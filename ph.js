@@ -14,15 +14,17 @@ const handleCoding = async () => {
 
 }
 const loadCodingPost = async (categoryId) => {
+    console.log(categoryId);
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const data = await response.json();
 
 
 
     const cardContainer = document.getElementById('card-container');
-
+     cardContainer.innerHTML="";
     data.data.forEach((entertainmentPost) => {
         console.log(entertainmentPost);
+     
 
         const div = document.createElement('div');
         div.innerHTML = `
@@ -53,3 +55,4 @@ const loadCodingPost = async (categoryId) => {
 
 }
 handleCoding();
+loadCodingPost("1");
