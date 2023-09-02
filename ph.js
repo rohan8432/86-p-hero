@@ -1,3 +1,7 @@
+
+
+
+
 const handleCoding = async () => {
     const response = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const data = await response.json();
@@ -41,11 +45,12 @@ const loadCodingPost = async (categoryId) => {
     <div class="card">
   
     <figure><img class= "h-48 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" />
+    <p class="absolute bottom-[11.5rem] left-[0.25rem] bg-black text-white text-sm">${timeConversion(entertainmentPost.others.posted_date)}
     </figure>
   
   
     <div class="card-body">
- 
+    
     <div class="flex gap-5">
 
                 <div>
@@ -71,8 +76,13 @@ const loadCodingPost = async (categoryId) => {
 
 }
 
+function timeConversion(timer) {
+    const hours = Math.floor(timer / 3600);
+    const minutes = Math.floor((timer % 3600) / 60);
+    const seconds = timer % 60;
 
-
+    return `${hours}hrs ${minutes} min ago`;
+}
 
 handleCoding();
 loadCodingPost("1000")
