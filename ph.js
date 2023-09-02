@@ -1,11 +1,30 @@
+const sortByViews =async () =>{
+    const response = await fetch('https://openapi.programming-hero.com/api/videos/categories');
+    const data = await response.json();
+    
+    const filteredData = data.data.filter((item) => item.others && typeof item.others.views !== 'undefined');
 
+    filteredData.sort((a, b) => b.others.views - a.others.views);
 
+    loadCodingPost("1000")
+}
 
 
 const handleCoding = async () => {
     const response = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const data = await response.json();
     console.log(data.data);
+
+   const sortByViews = document.getElementById('sort-by-views');
+   data.data.slice(0, 1).forEach((category)=>{
+    const sortInformation = document.createElement('div');
+    sortInformation.innerHTML = `
+    <button onclick="sortByViews()" class="bg-gray-200 w-16" id="sort-button">Sort by views</button>
+    `
+    sortByViews.appendChild(sortInformation);
+   })
+
+    
     const tabContainer = document.getElementById('tab-container');
     data.data.forEach((category) => {
         const div = document.createElement('div');
@@ -16,6 +35,8 @@ const handleCoding = async () => {
 
         tabContainer.appendChild(div);
     })
+
+
 
 }
 const loadCodingPost = async (categoryId) => {
@@ -40,12 +61,13 @@ const loadCodingPost = async (categoryId) => {
     data.data.forEach((entertainmentPost) => {
         console.log(entertainmentPost);
 
+
         const div = document.createElement('div');
         div.innerHTML = `
     <div class="card">
   
     <figure><img class= "h-48 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" />
-    <p class="absolute bottom-[11.5rem] left-[0.25rem] bg-black text-white text-sm">${timeConversion(entertainmentPost.others.posted_date)}
+    <p class="absolute bottom-[11.5rem] left-[0.25rem] bg-black rounded-sm text-white text-sm">${timeConversion(entertainmentPost.others.posted_date)}
     </figure>
   
   
@@ -68,12 +90,12 @@ const loadCodingPost = async (categoryId) => {
       
   </div>
     `
-
         cardContainer.appendChild(div);
-
 
     })
 
+
+   
 }
 
 function timeConversion(timer) {
@@ -83,6 +105,7 @@ function timeConversion(timer) {
 
     return `${hours}hrs ${minutes} min ago`;
 }
+
 
 handleCoding();
 loadCodingPost("1000")
