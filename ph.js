@@ -38,27 +38,16 @@ const loadCodingPost = async (categoryId) => {
 
         const div = document.createElement('div');
         div.innerHTML = `
-    <div class="card w-96">
-    <figure><img class= "h-56 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" />
+    <div class="card">
+  
+    <figure><img class= "h-48 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" />
     </figure>
-    
-    `
-   
-    const timer = entertainmentPost.others.posted_date;
-    console.log(timer);
-    const minutes = Math.floor(timer / 60);
-    const seconds = (timer % 60)
-
-    const hours = Math.floor(minutes / 60);
-    const minutesConvert = minutes % 60;
-    console.log(`${hours} hours ${minutesConvert} minute ${seconds} seconds`);
-
-
-    `
-    
-    </div>
+  
+  
     <div class="card-body">
+ 
     <div class="flex gap-5">
+
                 <div>
                     <img class="rounded-full h-12" src="${entertainmentPost.authors[0].profile_picture}" alt="">
                    </div>
@@ -75,14 +64,14 @@ const loadCodingPost = async (categoryId) => {
   </div>
     `
 
-
         cardContainer.appendChild(div);
 
 
     })
 
-
 }
+
+
 
 
 handleCoding();

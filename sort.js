@@ -20,3 +20,50 @@
 //     <script src="script.js"></script>
 // </body>
 // </html>
+
+${entertainmentPost.others.posted_date}
+   
+`
+function convertTime(timeInSeconds) {
+    const minutes = Math.floor(timeInSeconds / 60);
+    
+    const seconds = timeInSeconds % 60;
+    const hours = Math.floor(minutes / 60);
+    const minutesConvert = minutes % 60;
+     
+    return `${hours} hours ${minutesConvert} minutes ${seconds} seconds`;
+}
+convertTime();
+`
+
+
+`
+const timer = `${entertainmentPost.others.posted_date}`;
+const minutes = Math.floor(timer / 60);
+const seconds = timer % 60;
+const hours = Math.floor(minutes / 60);
+const minutesConvert = minutes % 60;
+const divTimer = document.createElement('div');
+divTimer.innerText = `${hours} hours ${minutesConvert} minutes ${seconds} seconds`;
+console.log(divTimer.innerText);
+cardContainer.appendChild(divTimer.innerText)
+`
+
+
+
+<p>
+`
+
+    const timer = `${entertainmentPost.others.posted_date}`
+    console.log(timer)
+    function timeConversion(timer) {
+        const hours = Math.floor(timer / 3600);
+        const minutes = Math.floor((timer % 3600) / 60);
+        const seconds = timer % 60;
+     
+        return `${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+
+    timeConversion();
+    `
+ </p>
