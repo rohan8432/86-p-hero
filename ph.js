@@ -9,20 +9,20 @@ const handleCoding = async () => {
         <a onclick="loadCodingPost(${category.category_id})" class="tab hover:bg-red-400 text-white bg-gray-400 font-semibold rounded-sm w-16">${category.category}</a>
        
         `
-   
+
         tabContainer.appendChild(div);
     })
 
 }
 const loadCodingPost = async (categoryId) => {
-    
+    console.log(categoryId);
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const data = await response.json();
 
     const cardContainer = document.getElementById('card-container');
     cardContainer.innerHTML = "";
-    if(data.data.length === 0){
-        
+    if (data.data.length === 0) {
+
         const notFoundDiv = document.createElement('div');
         notFoundDiv.innerHTML = `
         <div class="flex flex-col absolute left-[30%] top-56">
@@ -32,7 +32,7 @@ const loadCodingPost = async (categoryId) => {
         `;
         cardContainer.appendChild(notFoundDiv);
     }
-    
+
     data.data.forEach((entertainmentPost) => {
         console.log(entertainmentPost);
 
@@ -40,13 +40,23 @@ const loadCodingPost = async (categoryId) => {
         div.innerHTML = `
     <div class="card w-96">
     <figure><img class= "h-56 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" />
-   
     </figure>
-    <p>${entertainmentPost.others.posted_date
-  
-    }</p>
-  
-  
+    
+    `
+   
+    const timer = entertainmentPost.others.posted_date;
+    console.log(timer);
+    const minutes = Math.floor(timer / 60);
+    const seconds = (timer % 60)
+
+    const hours = Math.floor(minutes / 60);
+    const minutesConvert = minutes % 60;
+    console.log(`${hours} hours ${minutesConvert} minute ${seconds} seconds`);
+
+
+    `
+    
+    </div>
     <div class="card-body">
     <div class="flex gap-5">
                 <div>
@@ -67,7 +77,7 @@ const loadCodingPost = async (categoryId) => {
 
 
         cardContainer.appendChild(div);
-       
+
 
     })
 
@@ -76,3 +86,4 @@ const loadCodingPost = async (categoryId) => {
 
 
 handleCoding();
+loadCodingPost("1000")
