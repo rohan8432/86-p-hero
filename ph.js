@@ -54,7 +54,7 @@ const loadCodingPost = async (categoryId) => {
                </div>
      <div  class="flex">
      <p class="text-sm text-gray-500">${entertainmentPost.authors[0].profile_name}</p>
-     <p>${entertainmentPost.authors[0].verified ? '<img class="h-5 w-5" src="tick.png" alt="Verified">' : ''}</p>
+     <p>${entertainmentPost.authors[0].verified ? '<img class="h-5 w-5" src="../tick.png" alt="Verified">' : ''}</p>
      </div>
       <p class="text-sm text-gray-500">${entertainmentPost.others.views} views</p>
       
