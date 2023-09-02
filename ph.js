@@ -2,9 +2,9 @@ const sortByViews =async () =>{
     const response = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const data = await response.json();
     
-    const filteredData = data.data.filter((item) => item.others && typeof item.others.views !== 'undefined');
+    const filteredInformation = data.data.filter((item) => item.others && typeof item.others.views !== 'undefined');
 
-    filteredData.sort((a, b) => b.others.views - a.others.views);
+    filteredInformation.sort((a, b) => b.others.views - a.others.views);
 
     loadCodingPost("1000")
 }
@@ -19,7 +19,7 @@ const handleCoding = async () => {
    data.data.slice(0, 1).forEach((category)=>{
     const sortInformation = document.createElement('div');
     sortInformation.innerHTML = `
-    <button onclick="sortByViews()" class="bg-gray-200 w-16" id="sort-button">Sort by views</button>
+    <button onclick="sortByViews()" class="hover:bg-gray-400 bg-red-600 text-white font-semibold rounded-md w-36 h-8" id="sort-button">Sort by views</button>
     `
     sortByViews.appendChild(sortInformation);
    })
@@ -29,7 +29,7 @@ const handleCoding = async () => {
     data.data.forEach((category) => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <a onclick="loadCodingPost(${category.category_id})" class="tab hover:bg-red-400 text-white bg-gray-400 font-semibold rounded-sm w-16">${category.category}</a>
+        <a onclick="loadCodingPost(${category.category_id})" class="tab hover:bg-red-600 text-white bg-gray-400 font-semibold rounded-sm w-16">${category.category}</a>
        
         `
 
