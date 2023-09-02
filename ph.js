@@ -9,27 +9,39 @@ const handleCoding = async () => {
         <a onclick="loadCodingPost(${category.category_id})" class="tab hover:bg-red-400 bg-gray-200 text-black font-semibold rounded-sm w-16">${category.category}</a>
        
         `
+   
+        
         tabContainer.appendChild(div);
     })
 
 }
 const loadCodingPost = async (categoryId) => {
-    console.log(categoryId);
+    
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const data = await response.json();
 
-
-
     const cardContainer = document.getElementById('card-container');
-     cardContainer.innerHTML="";
+    cardContainer.innerHTML = "";
+    if(data.data.length === 0){
+        
+        const notFoundDiv = document.createElement('div');
+        notFoundDiv.innerHTML = `
+        <div class="flex flex-col absolute left-[30%] top-56">
+        <img class="h-18 w-56" src="Icon.png" alt="">
+        <p class="text-3xl font-bold">Oops!! Sorry, There is no content here</p>
+      </div>
+        `;
+        cardContainer.appendChild(notFoundDiv);
+    }
+    
     data.data.forEach((entertainmentPost) => {
         console.log(entertainmentPost);
-     
+
 
         const div = document.createElement('div');
         div.innerHTML = `
-    <div class="card w-96 bg-base-100 shadow-xl">
-    <figure><img class= "h-56 w-80" src="${entertainmentPost.thumbnail}" alt="Shoes" /></figure>
+    <div class="card w-96">
+    <figure><img class= "h-56 w-80 rounded-md" src="${entertainmentPost.thumbnail}" alt="Shoes" /></figure>
     
     <div class="card-body">
     <div class="flex gap-5">
@@ -40,13 +52,17 @@ const loadCodingPost = async (categoryId) => {
                    ${entertainmentPost.title}
                   </h2>
                </div>
-      <p class="text-sm text-gray-500">${entertainmentPost.authors[0].profile_name}</p>
+     <div  class="flex">
+     <p class="text-sm text-gray-500">${entertainmentPost.authors[0].profile_name}</p>
+     <p>${entertainmentPost.authors[0].verified ? '<img class="h-5 w-5" src="tick.png" alt="Verified">' : ''}</p>
+     </div>
       <p class="text-sm text-gray-500">${entertainmentPost.others.views} views</p>
       
-    </div>
   </div>
     `
+
         cardContainer.appendChild(div);
+
     })
 
 
@@ -55,4 +71,3 @@ const loadCodingPost = async (categoryId) => {
 
 }
 handleCoding();
-loadCodingPost("1");
